@@ -2,7 +2,7 @@ import { View } from "react-native";
 import React from "react";
 import Svg, { Text, Defs, LinearGradient, Stop } from "react-native-svg";
 
-export default function GradientText() {
+export default function GradientText({...props}) {
   return (
     <View style={{ justifyContent: "center", alignItems: "center" }}>
       <Svg height="60" width="200">

@@ -2,7 +2,7 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import GradientText from "@/components/gradientText";
-import Loading from "@/components/loading";
+import GradientLoading from "@/components/gradient_loading";
 import CustomText from "./CustomText";
 
 export default function SplashTimer() {
@@ -19,7 +19,7 @@ export default function SplashTimer() {
         <GradientText />
         <CustomText helperText={"RIDE IN STYLE"} textStyle={styles.text} type={true} />
       </View>
-      <Loading />
+      <GradientLoading />
     </LinearGradient>
   );
 }

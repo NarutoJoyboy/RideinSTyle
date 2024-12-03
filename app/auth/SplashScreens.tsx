@@ -9,8 +9,11 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome6 } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import CustomText from "../CustomText";
+import { useRouter, Href } from "expo-router";
+import CustomText from "../../components/CustomText";
+import { useNavigation } from "@react-navigation/native";
+import CustomButton from "../../components/customButton";
+import CreateAccount from "./createAccount";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -40,6 +43,7 @@ export default function OnboardingScreen() {
   const scrollViewRef = useRef<ScrollView>(null);
   const router = useRouter();
 
+  const navigation = useNavigation();
   const scrollToPage = (pageIndex: number) => {
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollTo({
@@ -100,20 +104,20 @@ export default function OnboardingScreen() {
           start={[0, 0]}
           style={styles.buttonGradient}
         >
-          <CustomText
-            helperText="Create Account"
+          <CustomButton
+            buttonText="Create Account"
             buttonStyle={styles.createAccBut}
             textStyle={styles.createAccText}
             type={false}
-            onPress={() => router.push("/CreateAccount")}
+            onPress={()=>router.push("/auth/createAccount")}
           />
         </LinearGradient>
-        <CustomText
-          helperText="Sign in"
+        <CustomButton
+          buttonText="Sign in"
           buttonStyle={styles.signinBut}
           textStyle={styles.signinText}
           type={false}
-          onPress={() => router.push("/SignIn")}
+          onPress={() => router.push("/auth/signIn")}
         />
       </View>
     );
