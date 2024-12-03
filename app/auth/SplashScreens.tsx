@@ -14,6 +14,7 @@ import CustomText from "../../components/CustomText";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../components/customButton";
 import CreateAccount from "./createAccount";
+import GradientView from "@/components/gradientView";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -98,7 +99,7 @@ export default function OnboardingScreen() {
   const FinalScreenActions = () =>
     focused === images.length - 1 && (
       <View style={styles.finalScreenActions}>
-        <LinearGradient
+        <GradientView
           colors={["#FF8101", "#FF1E5E", "#6720FF"]}
           end={[1, 1]}
           start={[0, 0]}
@@ -109,9 +110,10 @@ export default function OnboardingScreen() {
             buttonStyle={styles.createAccBut}
             textStyle={styles.createAccText}
             type={false}
-            onPress={()=>router.push("/auth/createAccount")}
+            onPress={() => router.push("/auth/createAccount")}
           />
-        </LinearGradient>
+        </GradientView>
+
         <CustomButton
           buttonText="Sign in"
           buttonStyle={styles.signinBut}
