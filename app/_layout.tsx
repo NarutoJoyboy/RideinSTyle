@@ -8,7 +8,9 @@ export default function RootLayout() {
 
       <Stack screenOptions={{
         headerShown: false,
-        
+        statusBarHidden: false,
+        statusBarBackgroundColor: 'black',
+        contentStyle: {backgroundColor:'black'}
       }} >
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="+not-found" />

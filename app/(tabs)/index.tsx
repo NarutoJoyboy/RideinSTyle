@@ -18,7 +18,5 @@ export default function index() {
   return (
       splashShown ? <SplashTimer /> : <SplashScreens />
 
-
-      // <SplashTimer />
   )
 }

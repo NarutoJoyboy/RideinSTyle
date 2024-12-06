@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function CustomView({...props}) {
   return (
-    <View style={props.viewStyle} >
+    <View style={props.style} >
         {props.children}
     </View>
   )

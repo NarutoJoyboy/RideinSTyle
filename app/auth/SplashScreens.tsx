@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../components/customButton";
 import CreateAccount from "./createAccount";
 import GradientView from "@/components/gradientView";
+import Style from "@/components/colors";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -169,7 +170,7 @@ export default function OnboardingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: Style.colors.background,
   },
   slide: {
     width: width,
