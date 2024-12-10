@@ -9,7 +9,7 @@ import GradientView from "./gradientView";
 export default function SplashTimer() {
   return (
     <GradientView
-      colors={["#36305C", "#19162E"]}
+      colors={["#36305C", "#19162E", "#000000"]}
       style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     >
       <View style={{ alignItems: "center", marginBottom: 60 }}>

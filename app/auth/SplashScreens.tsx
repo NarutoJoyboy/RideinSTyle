@@ -9,9 +9,8 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome6 } from "@expo/vector-icons";
-import { useRouter, Href } from "expo-router";
+import { useRouter} from "expo-router";
 import CustomText from "../../components/CustomText";
-import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../components/customButton";
 import CreateAccount from "./createAccount";
 import GradientView from "@/components/gradientView";
@@ -45,7 +44,6 @@ export default function OnboardingScreen() {
   const scrollViewRef = useRef<ScrollView>(null);
   const router = useRouter();
 
-  const navigation = useNavigation();
   const scrollToPage = (pageIndex: number) => {
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollTo({
@@ -141,7 +139,7 @@ export default function OnboardingScreen() {
           <View key={item.id} style={styles.slide}>
             <Image source={item.source} style={styles.image} />
             <LinearGradient
-              colors={["transparent", "rgba(0,0,0,0.8)"]}
+              colors={[ "transparent", "#000000", "rgba(0,0,0,0.8)"]}
               style={styles.gradient}
             />
             <View style={styles.textContainer}>
