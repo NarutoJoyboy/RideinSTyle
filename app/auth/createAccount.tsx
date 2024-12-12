@@ -9,12 +9,13 @@ import Style from "@/components/colors";
 import GradientButton from "@/components/gradientButton";
 import CustomIcons from "@/components/Icons";
 import CustomButton from "@/components/customButton";
+import { useRouter } from "expo-router";
 
 const { width, height } = Dimensions.get("window");
 
 export default function CreateAccount() {
   const [loading, setLoading] = useState(true);
-
+  const router = useRouter();
   useEffect(() => {
     const TimeOut = setTimeout(() => {
       setLoading(false);
@@ -46,9 +47,7 @@ export default function CreateAccount() {
     );
   };
 
-  return loading ? (
-    <Loading />
-  ) : (
+  return(
     <GradientView colors={["#1B182E", "#000000"]} style={styles.container}>
       <CustomView style={styles.fieldBox}>
         <CustomText helperText="Create Account" textStyle={styles.headerText} />
@@ -79,7 +78,6 @@ export default function CreateAccount() {
       </CustomView>
       <GradientButton
         gradStyle={styles.signupButtonGrad}
-        textStyle={styles.createText}
       >
         <CustomText helperText="Create Account" textStyle={styles.createText} />
       </GradientButton>
@@ -93,7 +91,10 @@ export default function CreateAccount() {
         <AutoLogin name={"google"} type={"FontAwesome"} />
         <AutoLogin name={"facebook"} type={"FontAwesome"} />
       </CustomView>
-      <CustomButton buttonText={'Sign in'} textStyle={{color:'white', fontSize:22, margin:20}}   />
+      <CustomView style={{flexDirection:'row', alignItems:'center', marginVertical:20}} >
+      <CustomText helperText="Already have an account?" textStyle={{color:Style.colors.text, fontSize:20}} />
+      <CustomButton buttonText={'Sign in'} textStyle={{color:Style.colors.buttonColor, fontSize:20, marginLeft:5}} onPress={()=>router.push('/auth/signIn')}    />
+      </CustomView>
     </GradientView>
   );
 }
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    justifyContent:'center',
   },
   nameBox: {
     flexDirection: "row",
