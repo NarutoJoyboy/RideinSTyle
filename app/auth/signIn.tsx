@@ -82,7 +82,8 @@ export default function SignIn() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: "center",
+    paddingTop:100
   },
   headerText: {
     color: "white",
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   signupButtonGrad: {
-    width: "90%",
+    width: "100%",
     height: height / 15,
     marginVertical: 30,
     borderRadius: 15,
