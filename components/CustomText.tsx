@@ -5,6 +5,6 @@ import { Link } from 'expo-router'
 export default function CustomText({...props}) {
 
   return (
-      <Text style={props.textStyle}>{props.helperText}</Text>
+      <Text style={props.textStyle} {...props} >{props.helperText}</Text>
   )
 }

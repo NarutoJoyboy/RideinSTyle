@@ -15,6 +15,7 @@ export default function _layout() {
         <Stack.Screen name="index" options={{ title: 'Index',  }} />
         <Stack.Screen name="createAccount" options={{ title: 'Create Account' }} />
         <Stack.Screen name="signIn" options={{ title: 'Sign In' }} />
+        <Stack.Screen name="verification" options={{ title: 'Verification' }} />
       </Stack>
     </View>
   );

@@ -39,7 +39,10 @@ export default function SignIn() {
             keyboardType="phone-pad"
           />
         </CustomView>
-        <GradientButton gradStyle={styles.signupButtonGrad}>
+        <GradientButton
+          gradStyle={styles.signupButtonGrad}
+          onPress={() => router.push("/auth/verification")}
+        >
           <CustomText helperText="Sign In" textStyle={styles.createText} />
         </GradientButton>
       </CustomView>
@@ -72,7 +75,7 @@ export default function SignIn() {
             fontSize: 20,
             marginLeft: 5,
           }}
-          onPress={() => router.push("/auth/createAccount")}
+          onPress={() => router.replace("/auth/createAccount")}
         />
       </CustomView>
     </GradientView>
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: "center",
-    paddingTop:100
+    paddingTop: 100,
   },
   headerText: {
     color: "white",
@@ -96,7 +99,7 @@ const styles = StyleSheet.create({
   },
   txtInput: {
     color: "white",
-    fontSize: 20,
+    fontSize: 15,
     borderBottomWidth: 1,
     borderBottomColor: Style.colors.borderColor,
     marginVertical: 10,
@@ -107,21 +110,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   iconBox: {
-    padding: 20,
     backgroundColor: "#0f081a",
-    margin: 1,
     borderRadius: 15,
-    width: 78,
-    height: 78,
+    width: 70,
+    height: 70,
     justifyContent: "center",
     alignItems: "center",
+    alignSelf: "center",
   },
   autoLoginGradStyle: {
     borderRadius: 15,
-    width: "22.3%",
-    height: 80,
+    width: 72,
+    height: 72,
     justifyContent: "center",
-    margin: 15,
+    marginHorizontal: 20,
+    marginTop: 30,
+    marginBottom: 40,
   },
   elseBox: {
     flexDirection: "row",
@@ -135,12 +139,12 @@ const styles = StyleSheet.create({
   },
   elseText: {
     color: Style.colors.borderColor,
-    fontSize: 17,
+    fontSize: 14,
   },
   nameText: {
     fontSize: 20,
     color: Style.colors.text,
-    marginVertical: 10,
+    marginVertical: 5,
   },
   signupButtonGrad: {
     width: "100%",
@@ -156,7 +160,7 @@ const styles = StyleSheet.create({
   },
   createText: {
     color: "white",
-    fontSize: 24,
+    fontSize: 22,
     textAlign: "center",
   },
 });

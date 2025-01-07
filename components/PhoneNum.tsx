@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function explore() {
+export default function PhoneNum() {
   return (
     <View>
-      <Text style={{fontSize:30, color:'white'}} >explore</Text>
+        
     </View>
   )
 }

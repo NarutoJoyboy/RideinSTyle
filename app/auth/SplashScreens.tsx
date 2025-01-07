@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import {
   View,
   Image,
@@ -6,19 +6,30 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome6 } from "@expo/vector-icons";
-import { useRouter} from "expo-router";
+import { useRouter } from "expo-router";
+
+// Custom Components
 import CustomText from "../../components/CustomText";
 import CustomButton from "../../components/customButton";
-import CreateAccount from "./createAccount";
 import GradientView from "@/components/gradientView";
 import Style from "@/components/colors";
 
 const { width, height } = Dimensions.get("screen");
 
-const images = [
+// Type Definition for Slide
+interface OnboardingSlide {
+  id: number;
+  source: number;
+  title: string;
+  description: string;
+}
+
+// Slides Data
+const ONBOARDING_SLIDES: OnboardingSlide[] = [
   {
     id: 1,
     source: require("../../assets/images/splash1.png"),
@@ -40,11 +51,17 @@ const images = [
 ];
 
 export default function OnboardingScreen() {
+  // State Management
   const [focused, setFocused] = useState(0);
+  
+  // Refs
   const scrollViewRef = useRef<ScrollView>(null);
+  
+  // Router
   const router = useRouter();
 
-  const scrollToPage = (pageIndex: number) => {
+  // Scroll to Page Handler (Memoized)
+  const scrollToPage = useCallback((pageIndex: number) => {
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollTo({
         x: pageIndex * width,
@@ -52,11 +69,12 @@ export default function OnboardingScreen() {
       });
       setFocused(pageIndex);
     }
-  };
+  }, []);
 
-  const PageIndicator = () => (
+  // Page Indicator Component
+  const PageIndicator = React.memo(() => (
     <View style={styles.indicatorContainer}>
-      {images.map((_, index) => (
+      {ONBOARDING_SLIDES.map((_, index) => (
         <View
           key={index}
           style={[
@@ -66,37 +84,47 @@ export default function OnboardingScreen() {
         />
       ))}
     </View>
-  );
+  ));
 
-  const NavigationArrows = () => (
+  // Navigation Arrows Component
+  const NavigationArrows = React.memo(() => (
     <View style={styles.navigationContainer}>
       {focused > 0 && (
         <TouchableOpacity
           style={styles.navLeft}
           onPress={() => scrollToPage(focused - 1)}
           accessibilityLabel="Previous slide"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <FontAwesome6 name="arrow-left" size={24} color="white" />
         </TouchableOpacity>
       )}
 
-      {focused < images.length - 1 && (
+      {focused < ONBOARDING_SLIDES.length - 1 && (
         <TouchableOpacity
           style={[
             styles.navRight,
-            { left: focused === 0 ? width / 1.3 : width / 1.53 },
+            { 
+              left: focused === 0 
+                ? width / 1.3 
+                : width / 1.53 
+            },
           ]}
           onPress={() => scrollToPage(focused + 1)}
           accessibilityLabel="Next slide"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <FontAwesome6 name="arrow-right" size={24} color="white" />
         </TouchableOpacity>
       )}
     </View>
-  );
+  ));
 
-  const FinalScreenActions = () =>
-    focused === images.length - 1 && (
+  // Final Screen Actions Component
+  const FinalScreenActions = React.memo(() => {
+    if (focused !== ONBOARDING_SLIDES.length - 1) return null;
+
+    return (
       <View style={styles.finalScreenActions}>
         <GradientView
           colors={["#FF8101", "#FF1E5E", "#6720FF"]}
@@ -122,6 +150,15 @@ export default function OnboardingScreen() {
         />
       </View>
     );
+  });
+
+  // Handle Scroll Event
+  const handleScroll = (e: any) => {
+    const pageIndex = Math.round(
+      e.nativeEvent.contentOffset.x / width
+    );
+    setFocused(pageIndex);
+  };
 
   return (
     <View style={styles.container}>
@@ -130,16 +167,18 @@ export default function OnboardingScreen() {
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
-        onScroll={(e) => {
-          const pageIndex = Math.round(e.nativeEvent.contentOffset.x / width);
-          setFocused(pageIndex);
-        }}
+        scrollEventThrottle={16}
+        onScroll={handleScroll}
       >
-        {images.map((item) => (
+        {ONBOARDING_SLIDES.map((item) => (
           <View key={item.id} style={styles.slide}>
-            <Image source={item.source} style={styles.image} />
+            <Image 
+              source={item.source} 
+              style={styles.image} 
+              resizeMode="cover"
+            />
             <LinearGradient
-              colors={[ "transparent", "#000000", "rgba(0,0,0,0.8)"]}
+              colors={["transparent", "#000000", "rgba(0,0,0,0.8)"]}
               style={styles.gradient}
             />
             <View style={styles.textContainer}>
@@ -226,7 +265,7 @@ const styles = StyleSheet.create({
   },
   navigationContainer: {
     position: "absolute",
-    bottom: 30,
+    bottom: Platform.OS === 'ios' ? 50 : 30,
     width: width,
     flexDirection: "row",
     paddingHorizontal: 20,

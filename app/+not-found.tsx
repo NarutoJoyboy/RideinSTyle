@@ -4,7 +4,7 @@ import React from 'react'
 export default function NotFoundScreen() {
   return (
     <View>
-      <Text>+not-found</Text>
+      <Text style={{fontSize:30, color:'white'}} >+not-found</Text>
     </View>
   )
 }
